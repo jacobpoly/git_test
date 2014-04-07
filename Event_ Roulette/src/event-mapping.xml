@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="event_ns">
+	<insert id="insertDev" parameterType="eventVO">
+		insert into
+		tb_customer(id,password,name)
+		values(#{id},#{password},#{name})
+	</insert>
+
+	<select id="selectDev" resultType="eventVO">
+		select * from tb_customer
+	</select>
+
+	<select id="search_EventYN" parameterType="studentVO"
+		resultType="studentVO">
+		SELECT CASE WHEN ENTER_CNT > 0 THEN 'Y' ELSE 'N' END ENTER_YN,
+		ENTER_CNT, B.STUDENT_STT_BRN
+		FROM (
+		SELECT COUNT(*) ENTER_CNT, A.CLIENT_MEM_CODE
+		FROM DBO.TB_MKB_EVENT_ENTER A
+		<if test="event_no != null or event_no != ' ' ">
+			WHERE A.EVENT_NO = #{event_no}
+		</if>
+		<if test="client_mem_code != null or client_mem_code != ' ' ">
+			AND
+			A.CLIENT_MEM_CODE = #{client_mem_code}
+		</if>
+		GROUP BY A.CLIENT_MEM_CODE
+		)A
+		INNER JOIN G2_KCMS.dbo.VW_STA_STUDENT B ON A.CLIENT_MEM_CODE =
+		B.CLIENT_MEM_CODE
+	</select>
+
+	<select id="selectedDev" parameterType="eventVO" resultType="eventVO">
+		select *
+		from tb_customer
+		where id = ${id}
+	</select>
+
+	<update id="updateDev" parameterType="eventVO">
+		update tb_customer set
+		name=#{name}, password=#{password}
+		where id=#{id}
+	</update>
+</mapper>
