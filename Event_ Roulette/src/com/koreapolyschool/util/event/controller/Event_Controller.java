@@ -25,7 +25,7 @@ public class Event_Controller {
 	
 	@RequestMapping("/e_gamestart.do")
 	public ModelAndView gamestart(){   
-		//dsjakldsajlk log.info("================ Method Name : gamestart"); 
+		log.info("================ Method Name : gamestart"); 
 		
 		//룰렛 시작 초기에 필요한 데이터 정의 하는 곳 
 		
@@ -39,7 +39,7 @@ public class Event_Controller {
 		
 // 서버로 부터 받아올 정보		
 		int event_no = 1; // 이벤트 번호
-		int cilent_mem_code = 52510;  // 클라이언트 맴버 코드  
+		int member_code = 52510;  // 클라이언트 맴버 코드  
 //	 서버로 부터 받아올 정보	
 // 재학생 		
 
@@ -50,11 +50,11 @@ public class Event_Controller {
 		// 참여하기 버튼 활성화 비 활성화
 		
 		studentvo.setEvent_no(event_no);
-		studentvo.setClient_mem_code(cilent_mem_code);
+		studentvo.setMember_code(member_code);
 		
 		studentvo = event_Service.search_EventYN(studentvo);
 				
-			//	System.out.println("!!!  "+studentvo.getStudent_stt_brn());  // 학생 상태 코드 03 재학생
+				System.out.println("!!!  "+studentvo.getEnter_yn());  // 학생 상태 코드 03 재학생
 		if ( studentvo.getEnter_yn().equals("Y"))  {   // 이벤트 참여 여부 체크 뷰 단에 룰렛 회전을 보낸다.
 			
 			//start_mav.addObject("event_yn", studentvo.getEnter_yn() );
