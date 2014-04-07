@@ -25,7 +25,7 @@ public class Event_Controller {
 	
 	@RequestMapping("/e_gamestart.do")
 	public ModelAndView gamestart(){   
-		  //log.info("================ Method Name : gamestart");        
+		  log.info("================ Method Name : gamestart");        
 		
 		//룰렛 시작 초기에 필요한 데이터 정의 하는 곳 
 		
